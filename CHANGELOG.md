@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/Pushikoo/pushikoo-pusher-dingtalk/compare/v0.1.1...v0.2.0) (2025-12-18)
+
+
+### Features
+
+* Introduce DingTalk pusher with configuration models for OSS and webhook, and a basic flow test. ([7090e2e](https://github.com/Pushikoo/pushikoo-pusher-dingtalk/commit/7090e2ef7caaf30ec72f418dce240d83e06f622a))
+
 ## [0.1.1](https://github.com/Pushikoo/pushikoo-pusher-dingtalk/compare/v0.1.0...v0.1.1) (2025-12-18)
 
 
