@@ -8,9 +8,9 @@ classifiers = [
   "Programming Language :: Python :: 3",
   "Operating System :: OS Independent",
 ]
-dependencies = ["pushikoo-interface>=0.3.0", "requests", "loguru"]
-description = "TestPusher for pushikoo-adapter development as a template."
-name = "pushikoo-adapter-testpusher"
+dependencies = ["pushikoo-interface>=1.0.0", "requests", "loguru", "boto3"]
+description = "DingTalk custom bot pusher for Pushikoo."
+name = "pushikoo-pusher-dingtalk"
 readme = "README.md"
 requires-python = ">=3.10"
 dynamic = ['version']
@@ -19,7 +19,7 @@ dynamic = ['version']
 dev = ["ruff", "pytest"]
 
 [project.urls]
-"Homepage" = "https://github.com/Pushikoo/pushikoo-adapter-testpusher"
+"Homepage" = "https://github.com/Pushikoo/pushikoo-pusher-dingtalk"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
@@ -33,5 +33,4 @@ version_scheme = "post-release"
 local_scheme = "node-and-date"
 
 [project.entry-points."pushikoo.adapter"]
-# TODO: Define your adapter export point here
-testpusher = "pushikoo_adapter_testpusher:TestPusher"
+dingtalk = "pushikoo_pusher_dingtalk:DingTalkPusher"
