@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/Pushikoo/pushikoo-pusher-dingtalk/compare/v0.1.0...v0.1.1) (2025-12-18)
+
+
+### Miscellaneous Chores
+
+* deps ([228a346](https://github.com/Pushikoo/pushikoo-pusher-dingtalk/commit/228a34668e042885602eec991215b03a7df2e8a2))
+
 ## 0.1.0 (2025-12-18)
 
 
