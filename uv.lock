@@ -248,7 +248,7 @@ dev = [
 requires-dist = [
     { name = "boto3" },
     { name = "loguru" },
-    { name = "pushikoo-interface", specifier = ">=0.3.0" },
+    { name = "pushikoo-interface", specifier = ">=1.0.0" },
     { name = "pytest", marker = "extra == 'dev'" },
     { name = "requests" },
     { name = "ruff", marker = "extra == 'dev'" },
