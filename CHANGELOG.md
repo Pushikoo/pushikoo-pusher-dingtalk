@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.0 (2025-12-18)
+
+
+### Features
+
+* Implement DingTalk pusher adapter with OSS image upload and update dependencies. ([c94c33c](https://github.com/Pushikoo/pushikoo-pusher-dingtalk/commit/c94c33cec84db22d366c142c15047f27a90ddbe2))
+
 ## 0.1.0 (2025-12-13)
 
 
