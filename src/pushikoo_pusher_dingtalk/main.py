@@ -18,15 +18,20 @@ class DingTalkPusher(Pusher[AdapterConfig, InstanceConfig]):
     """钉钉群自定义机器人推送器。"""
 
     def __init__(self) -> None:
-        self.api = DingtalkChatbot(
+        logger.debug(f"{self.adapter_name}.{self.identifier} initialized")
+
+    def _create_api(self) -> DingtalkChatbot:
+        """Create API client instance with current config (supports hot-reload)."""
+        return DingtalkChatbot(
             webhook=self.instance_config.webhook_url,
             secret=self.instance_config.secret or None,
         )
 
-        # Initialize S3 client for OSS upload
+    def _create_s3_client(self):
+        """Create S3 client instance with current config (supports hot-reload)."""
         # Note: Disable request checksum calculation to avoid chunked encoding issues
         # with some S3-compatible services that don't properly handle AWS SDK checksums
-        self._s3_client = boto3.client(
+        return boto3.client(
             "s3",
             endpoint_url=self.config.oss.endpoint,
             aws_access_key_id=self.config.oss.access_key,
@@ -38,13 +43,12 @@ class DingTalkPusher(Pusher[AdapterConfig, InstanceConfig]):
             ),
         )
 
-        logger.debug(f"{self.adapter_name}.{self.identifier} initialized")
-
     def push(self, content: Struct) -> None:
         """推送消息到钉钉群。"""
+        api = self._create_api()
         md = self._to_markdown(content)
         title = md[:10] if len(md) > 10 else md
-        self.api.send_markdown(title, md)
+        api.send_markdown(title, md)
 
     def _to_markdown(self, struct: Struct) -> str:
         """将 Struct 转换为 Markdown 格式。"""
@@ -104,8 +108,9 @@ class DingTalkPusher(Pusher[AdapterConfig, InstanceConfig]):
 
         key = f"{sha256_hash}{ext}"
 
-        # 上传到 OSS
-        self._s3_client.put_object(
+        # 创建 S3 客户端并上传到 OSS
+        s3_client = self._create_s3_client()
+        s3_client.put_object(
             Bucket=self.config.oss.bucket,
             Key=key,
             Body=file_content,
@@ -115,7 +120,7 @@ class DingTalkPusher(Pusher[AdapterConfig, InstanceConfig]):
 
         # 生成预签名 URL，有效期至 2099-12-31
         expires_in = EXPIRATION_TIMESTAMP - int(datetime.now().timestamp())
-        presigned_url = self._s3_client.generate_presigned_url(
+        presigned_url = s3_client.generate_presigned_url(
             "get_object",
             Params={"Bucket": self.config.oss.bucket, "Key": key},
             ExpiresIn=expires_in,
