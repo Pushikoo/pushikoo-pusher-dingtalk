@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/Pushikoo/pushikoo-pusher-dingtalk/compare/v0.2.0...v0.2.1) (2025-12-22)
+
+
+### Bug Fixes
+
+* trigger ci ([caddaad](https://github.com/Pushikoo/pushikoo-pusher-dingtalk/commit/caddaad642d8b872c6d8dd1dcb54fdff9d563c48))
+
 ## [0.2.0](https://github.com/Pushikoo/pushikoo-pusher-dingtalk/compare/v0.1.1...v0.2.0) (2025-12-18)
 
 
